@@ -58,14 +58,12 @@
       transition: background 0.45s, color 0.45s;
     }
 
-    /* Noise texture */
     body::before {
       content:''; position:fixed; inset:0;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events:none; z-index:9999; opacity:0.3;
     }
 
-    /* CURSOR GLOW */
     #cursor-glow {
       position:fixed; width:520px; height:520px; border-radius:50%;
       background:radial-gradient(circle, var(--cursor-color) 0%, transparent 70%);
@@ -73,7 +71,6 @@
       transition: opacity 0.3s;
     }
 
-    /* ── NAV ── */
     nav {
       position:fixed; top:0; left:0; right:0; z-index:200;
       display:flex; align-items:center; justify-content:space-between;
@@ -97,7 +94,6 @@
     .nav-links a:hover { color:var(--white); }
     .nav-right { display:flex; align-items:center; gap:12px; }
 
-    /* THEME TOGGLE */
     .theme-icon { font-size:1rem; cursor:pointer; user-select:none; transition:transform 0.3s; }
     .theme-icon:hover { transform:scale(1.2) rotate(15deg); }
     .theme-track {
@@ -122,7 +118,6 @@
     }
     .nav-cta:hover { box-shadow:0 0 22px var(--accent-glow); transform:translateY(-1px); }
 
-    /* ── HERO ── */
     .hero {
       min-height:100vh; display:flex; align-items:center;
       padding:110px 60px 80px; position:relative; overflow:hidden;
@@ -211,13 +206,11 @@
     .si:hover { border-color:var(--accent); color:var(--accent); background:rgba(79,143,255,0.07); }
     .si svg { width:14px; height:14px; fill:currentColor; }
 
-    /* ── PHOTO WRAP ── */
     .photo-wrap {
       position:relative; height:520px;
       display:flex; align-items:center; justify-content:center;
     }
 
-    /* FLOATING TECH ICONS */
     .ti {
       position:absolute;
       display:flex; align-items:center; justify-content:center;
@@ -236,7 +229,6 @@
     .ti.md { width:48px; height:48px; font-size:1.35rem; }
     .ti.sm { width:40px; height:40px; font-size:1rem; }
 
-    /* Individual positions */
     .ti-html  { top:2%;   left:4%;   animation:fl3 4.3s ease-in-out infinite; }
     .ti-css   { top:18%;  left:0%;   animation:fl1 5.1s ease-in-out infinite 0.5s; }
     .ti-js    { top:38%;  left:3%;   animation:fl2 4.8s ease-in-out infinite 1s; }
@@ -256,7 +248,6 @@
     @keyframes fl4 { 0%,100%{transform:translateY(0) rotate(0)} 33%{transform:translateY(-6px) rotate(1deg)} 66%{transform:translateY(-10px) rotate(-1deg)} }
     @keyframes fl5 { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-9px) scale(1.04)} }
 
-    /* Tooltip */
     .ti::after {
       content:attr(data-tip);
       position:absolute; bottom:-24px; left:50%; transform:translateX(-50%);
@@ -266,7 +257,6 @@
     }
     .ti:hover::after { opacity:1; }
 
-    /* Photo */
     .hero-photo {
       width:270px; height:360px;
       object-fit:cover; object-position:top center;
@@ -282,7 +272,6 @@
       flex-direction:column; gap:10px; position:relative; z-index:2;
     }
 
-    /* ── SECTIONS ── */
     section { padding:96px 60px; }
     .wrap { max-width:1200px; margin:0 auto; }
     .stag {
@@ -299,7 +288,6 @@
     .ssub { font-size:0.95rem; color:var(--muted); line-height:1.7; max-width:500px; }
     .divider { border:none; border-top:1px solid var(--border); margin:0; }
 
-    /* ── ABOUT ── */
     #about { background:var(--bg2); }
     .about-grid {
       display:grid; grid-template-columns:1fr 1fr;
@@ -315,7 +303,6 @@
     .qlist li::before { content:'—'; color:var(--accent); font-weight:700; flex-shrink:0; }
     .qlist li strong { color:var(--text); }
 
-    /* ── SKILLS ── */
     .skills-wall { display:flex; flex-wrap:wrap; gap:10px; margin-top:44px; }
     .spill {
       display:flex; align-items:center; gap:7px;
@@ -334,45 +321,346 @@
       border-left:1px solid var(--border); padding-left:7px; margin-left:2px;
     }
 
-    /* ── PROJECTS ── */
-    #projects { background:var(--bg2); }
-    .pgrid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:48px; }
-    .pcard {
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:14px; overflow:hidden;
-      transition:transform 0.2s, border-color 0.2s;
+    /* ══════════════════════════════════════
+       PROJECTS — COMING SOON
+    ══════════════════════════════════════ */
+    #projects {
+      background: var(--bg2);
+      position: relative;
+      overflow: hidden;
     }
-    .pcard:hover { transform:translateY(-5px); border-color:rgba(79,143,255,0.3); }
-    .pcard.feat { grid-column:span 2; }
-    .pthumb {
-      height:155px; display:flex; align-items:center; justify-content:center;
-      font-size:2.4rem; position:relative; overflow:hidden;
-    }
-    .pcard.feat .pthumb { height:195px; }
-    .ptbg { position:absolute; inset:0; background:linear-gradient(135deg,var(--c1),var(--c2)); opacity:0.45; }
-    .ptico { position:relative; z-index:1; }
-    .pbody { padding:20px; }
-    .ptags { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:9px; }
-    .ptag {
-      font-size:0.67rem; font-weight:600; letter-spacing:0.05em;
-      padding:3px 9px; border-radius:999px;
-      background:rgba(79,143,255,0.09); color:var(--accent2);
-    }
-    [data-theme="light"] .ptag { background:rgba(37,99,235,0.07); color:var(--accent); }
-    .ptitle {
-      font-family:'Syne',sans-serif; font-weight:700;
-      font-size:0.98rem; color:var(--htitle); margin-bottom:7px;
-    }
-    .pdesc { font-size:0.83rem; color:var(--muted); line-height:1.65; margin-bottom:16px; }
-    .plink {
-      font-size:0.8rem; font-weight:600; color:var(--accent);
-      text-decoration:none; display:inline-flex; align-items:center; gap:5px;
-      transition:gap 0.2s;
-    }
-    .plink:hover { gap:9px; }
-    .plink::after { content:'→'; }
 
-    /* ── CONTACT ── */
+    /* Animated grid background */
+    #projects::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 0%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 0%, transparent 100%);
+      animation: gridShift 12s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes gridShift {
+      0%   { background-position: 0 0, 0 0; }
+      100% { background-position: 60px 60px, 60px 60px; }
+    }
+
+    .cs-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Header row */
+    .cs-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 72px;
+    }
+
+    /* Central coming soon block */
+    .cs-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 40px;
+      position: relative;
+    }
+
+    /* Rotating ring */
+    .cs-ring {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 44px;
+    }
+
+    .cs-ring svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cs-ring .ring-outer {
+      animation: spinCW 10s linear infinite;
+    }
+    .cs-ring .ring-inner {
+      animation: spinCCW 7s linear infinite;
+    }
+    @keyframes spinCW  { to { transform: rotate(360deg);  transform-origin: center; } }
+    @keyframes spinCCW { to { transform: rotate(-360deg); transform-origin: center; } }
+
+    .cs-ring-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      filter: drop-shadow(0 0 18px var(--accent));
+      animation: breathe 3s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%,100% { transform: scale(1);   filter: drop-shadow(0 0 14px var(--accent)); }
+      50%      { transform: scale(1.1); filter: drop-shadow(0 0 28px var(--accent2)); }
+    }
+
+    /* Big text */
+    .cs-label {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--htitle);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    /* Shimmer effect on the text */
+    .cs-label::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        110deg,
+        transparent 30%,
+        rgba(79,143,255,0.55) 50%,
+        transparent 70%
+      );
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    [data-theme="light"] .cs-label::after {
+      background: linear-gradient(
+        110deg,
+        transparent 30%,
+        rgba(37,99,235,0.6) 50%,
+        transparent 70%
+      );
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    .cs-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 48px;
+    }
+
+    /* Floating placeholder cards */
+    .cs-cards {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+
+    .cs-card {
+      width: 160px;
+      height: 120px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .cs-card:nth-child(1) { animation: cardFloat 4.2s ease-in-out infinite; }
+    .cs-card:nth-child(2) { animation: cardFloat 5.1s ease-in-out infinite 0.6s; }
+    .cs-card:nth-child(3) { animation: cardFloat 3.8s ease-in-out infinite 1.2s; }
+    .cs-card:nth-child(4) { animation: cardFloat 4.7s ease-in-out infinite 0.3s; }
+
+    @keyframes cardFloat {
+      0%,100% { transform: translateY(0) rotate(-0.5deg); }
+      50%      { transform: translateY(-10px) rotate(0.5deg); }
+    }
+
+    .cs-card:hover {
+      transform: translateY(-14px) scale(1.04) !important;
+      border-color: rgba(79,143,255,0.4);
+    }
+
+    /* Skeleton shimmer inside cards */
+    .cs-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(79,143,255,0.06) 50%,
+        transparent 60%
+      );
+      background-size: 300% 100%;
+      animation: cardShimmer 2.8s ease-in-out infinite;
+    }
+    .cs-card:nth-child(2)::before { animation-delay: 0.4s; }
+    .cs-card:nth-child(3)::before { animation-delay: 0.8s; }
+    .cs-card:nth-child(4)::before { animation-delay: 1.2s; }
+
+    @keyframes cardShimmer {
+      0%   { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    .cs-card-inner {
+      position: absolute;
+      inset: 0;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .cs-skel {
+      height: 7px;
+      border-radius: 999px;
+      background: var(--border);
+    }
+    .cs-skel.w60 { width: 60%; }
+    .cs-skel.w80 { width: 80%; }
+    .cs-skel.w45 { width: 45%; }
+
+    /* Top stripe */
+    .cs-card-stripe {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 44px;
+      border-radius: 14px 14px 0 0;
+    }
+    .cs-card:nth-child(1) .cs-card-stripe { background: linear-gradient(135deg,#1a2a6c,#b21f1f); opacity:0.4; }
+    .cs-card:nth-child(2) .cs-card-stripe { background: linear-gradient(135deg,#0f3460,#533483); opacity:0.4; }
+    .cs-card:nth-child(3) .cs-card-stripe { background: linear-gradient(135deg,#134e5e,#71b280); opacity:0.4; }
+    .cs-card:nth-child(4) .cs-card-stripe { background: linear-gradient(135deg,#373b44,#4286f4); opacity:0.4; }
+
+    /* Lock badge */
+    .cs-lock {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative;
+      overflow: hidden;
+    }
+    .cs-lock::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(79,143,255,0.08), transparent);
+      background-size: 200% 100%;
+      animation: lockScan 3s ease-in-out infinite;
+    }
+    @keyframes lockScan {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .cs-lock-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    /* Notify bar */
+    .cs-notify {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 10px 10px 16px;
+      max-width: 360px;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+    .cs-notify:focus-within { border-color: var(--accent); }
+    .cs-notify input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.84rem;
+      color: var(--text);
+    }
+    .cs-notify input::placeholder { color: var(--muted); }
+    .cs-notify button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .cs-notify button:hover {
+      box-shadow: 0 0 18px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    /* Orbiting particles */
+    .cs-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .cs-particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+      animation: particleDrift linear infinite;
+    }
+
+    @keyframes particleDrift {
+      0%   { opacity: 0; transform: translateY(0) scale(0); }
+      10%  { opacity: 0.6; transform: scale(1); }
+      90%  { opacity: 0.2; }
+      100% { opacity: 0; transform: translateY(-120px) scale(0.3); }
+    }
+
+    /* ══════════════════════════════════════ */
+
     .cgrid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; margin-top:52px; }
     .cinfo p { font-size:0.95rem; color:var(--muted); line-height:1.8; margin-bottom:24px; }
     .citems { display:flex; flex-direction:column; gap:12px; }
@@ -411,7 +699,6 @@
     }
     .fsub:hover { transform:translateY(-2px); box-shadow:0 8px 28px var(--accent-glow); }
 
-    /* FOOTER */
     footer {
       border-top:1px solid var(--border); padding:30px 60px;
       display:flex; align-items:center; justify-content:space-between;
@@ -429,7 +716,6 @@
     }
     .fsocials a:hover { border-color:var(--accent); color:var(--accent); }
 
-    /* SCROLL ANIM */
     .fu { opacity:0; transform:translateY(26px); transition:opacity 0.6s ease, transform 0.6s ease; }
     .fu.vis { opacity:1; transform:translateY(0); }
 
@@ -441,9 +727,9 @@
       .photo-wrap { height:400px; }
       section { padding:64px 22px; }
       .about-grid,.cgrid { grid-template-columns:1fr; gap:38px; }
-      .pgrid { grid-template-columns:1fr; }
-      .pcard.feat { grid-column:span 1; }
       footer { flex-direction:column; gap:12px; text-align:center; padding:22px; }
+      .cs-cards { gap: 10px; }
+      .cs-card { width: 130px; height: 100px; }
     }
   </style>
 </head>
@@ -473,7 +759,6 @@
   <div class="orb orb-b" id="orbB"></div>
 
   <div class="hero-inner">
-    <!-- TEXT -->
     <div>
       <div class="hero-badge">IT Student · Open to Opportunities</div>
       <h1 class="hero-name">Hi, I'm <span class="ac">Jhon Ralph</span><br>Flores</h1>
@@ -496,23 +781,19 @@
       </div>
     </div>
 
-    <!-- PHOTO + FLOATING ICONS -->
     <div class="photo-wrap">
-      <!-- Left icons -->
       <div class="ti lg ti-html" data-tip="HTML5">🌐</div>
       <div class="ti md ti-css"  data-tip="CSS3">🎨</div>
       <div class="ti lg ti-js"   data-tip="JavaScript">⚡</div>
       <div class="ti md ti-py"   data-tip="Python">🐍</div>
       <div class="ti sm ti-larv" data-tip="Laravel">🔴</div>
       <div class="ti sm ti-db"   data-tip="MySQL">🗄️</div>
-      <!-- Right icons -->
       <div class="ti lg ti-next" data-tip="Next.js">▲</div>
       <div class="ti md ti-nuxt" data-tip="Nuxt.js">💚</div>
       <div class="ti lg ti-flu"  data-tip="Flutter">💙</div>
       <div class="ti md ti-dart" data-tip="Dart">🎯</div>
       <div class="ti sm ti-post" data-tip="PostgreSQL">🐘</div>
       <div class="ti sm ti-cv"   data-tip="OpenCV">👁️</div>
-      <!-- Photo -->
       <img src="prof.png" alt="Jhon Ralph Flores" class="hero-photo"
         onerror="this.style.display='none';document.getElementById('phph').style.display='flex';" />
       <div class="hero-photo-ph" id="phph" style="display:none;">
@@ -584,59 +865,112 @@
 
 <hr class="divider"/>
 
-<!-- PROJECTS -->
+<!-- PROJECTS — COMING SOON -->
 <section id="projects">
-  <div class="wrap">
-    <div class="fu">
-      <span class="stag">Projects</span>
-      <h2 class="stitle">Things I've built.</h2>
-      <p class="ssub">A selection of personal and academic projects — each one a lesson learned and a skill sharpened.</p>
+
+  <!-- Floating particles -->
+  <div class="cs-particles" id="csParticles"></div>
+
+  <div class="cs-container">
+
+    <!-- Section header -->
+    <div class="cs-header fu">
+      <div>
+        <span class="stag">Projects</span>
+        <h2 class="stitle">Things I've built.</h2>
+      </div>
     </div>
-    <div class="pgrid">
-      <div class="pcard feat fu">
-        <div class="pthumb" style="--c1:#1a2a6c;--c2:#b21f1f;">
-          <div class="ptbg"></div><span class="ptico">🛒</span>
+
+    <!-- Coming soon stage -->
+    <div class="cs-stage fu">
+
+      <!-- Rotating rings -->
+      <div class="cs-ring">
+        <!-- Outer dashed ring -->
+        <svg class="ring-outer" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="90" cy="90" r="82"
+            stroke="url(#ringGradOuter)"
+            stroke-width="1.5"
+            stroke-dasharray="8 6"
+            stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="ringGradOuter" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#4f8fff" stop-opacity="0.8"/>
+              <stop offset="50%" stop-color="#7dd3fc" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#4f8fff" stop-opacity="0.8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <!-- Inner dotted ring -->
+        <svg class="ring-inner" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="90" cy="90" r="62"
+            stroke="url(#ringGradInner)"
+            stroke-width="1"
+            stroke-dasharray="3 9"
+            stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="ringGradInner" x1="180" y1="0" x2="0" y2="180" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#4f8fff" stop-opacity="0.2"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <!-- Center icon -->
+        <div class="cs-ring-center">🚧</div>
+      </div>
+
+      <!-- Headline -->
+      <h3 class="cs-label" data-text="Coming Soon">Coming Soon</h3>
+      <p class="cs-sub">I'm currently crafting a collection of projects worth showing. Check back soon — good things take a little time to build right.</p>
+
+      <!-- Ghost cards -->
+      <div class="cs-cards">
+        <div class="cs-card">
+          <div class="cs-card-stripe"></div>
+          <div class="cs-card-inner">
+            <div class="cs-skel w80"></div>
+            <div class="cs-skel w60"></div>
+            <div class="cs-skel w45"></div>
+          </div>
         </div>
-        <div class="pbody">
-          <div class="ptags"><span class="ptag">Laravel</span><span class="ptag">MySQL</span><span class="ptag">HTML/CSS</span></div>
-          <div class="ptitle">E-Commerce Web App</div>
-          <p class="pdesc">A full-stack e-commerce platform built with Laravel featuring user authentication, product listings, cart management, and order tracking with a clean MVC architecture.</p>
-          <a href="#" class="plink">View Project</a>
+        <div class="cs-card">
+          <div class="cs-card-stripe"></div>
+          <div class="cs-card-inner">
+            <div class="cs-skel w60"></div>
+            <div class="cs-skel w80"></div>
+            <div class="cs-skel w45"></div>
+          </div>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-stripe"></div>
+          <div class="cs-card-inner">
+            <div class="cs-skel w45"></div>
+            <div class="cs-skel w80"></div>
+            <div class="cs-skel w60"></div>
+          </div>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-stripe"></div>
+          <div class="cs-card-inner">
+            <div class="cs-skel w80"></div>
+            <div class="cs-skel w45"></div>
+            <div class="cs-skel w60"></div>
+          </div>
         </div>
       </div>
-      <div class="pcard fu">
-        <div class="pthumb" style="--c1:#0f3460;--c2:#533483;">
-          <div class="ptbg"></div><span class="ptico">📸</span>
-        </div>
-        <div class="pbody">
-          <div class="ptags"><span class="ptag">Python</span><span class="ptag">OpenCV</span><span class="ptag">NumPy</span></div>
-          <div class="ptitle">Image Filter Pipeline</div>
-          <p class="pdesc">A Python-based image processing tool applying edge detection, color segmentation, and noise reduction on uploaded photos in real time.</p>
-          <a href="#" class="plink">View Project</a>
-        </div>
+
+      <!-- Status badge -->
+      <div class="cs-lock">
+        <span class="cs-lock-dot"></span>
+        In Development
       </div>
-      <div class="pcard fu">
-        <div class="pthumb" style="--c1:#134e5e;--c2:#71b280;">
-          <div class="ptbg"></div><span class="ptico">📱</span>
-        </div>
-        <div class="pbody">
-          <div class="ptags"><span class="ptag">Flutter</span><span class="ptag">Dart</span><span class="ptag">SQLite</span></div>
-          <div class="ptitle">Task Manager App</div>
-          <p class="pdesc">A cross-platform mobile productivity app with local database storage, task categorization, reminders, and a minimal Flutter UI.</p>
-          <a href="#" class="plink">View Project</a>
-        </div>
+
+      <!-- Notify input -->
+      <div class="cs-notify" style="margin-top:20px;">
+        <input type="email" placeholder="Notify me when it's live…" id="csEmail"/>
+        <button onclick="handleNotify()">Notify Me</button>
       </div>
-      <div class="pcard fu">
-        <div class="pthumb" style="--c1:#373b44;--c2:#4286f4;">
-          <div class="ptbg"></div><span class="ptico">🌐</span>
-        </div>
-        <div class="pbody">
-          <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">PostgreSQL</span><span class="ptag">REST API</span></div>
-          <div class="ptitle">Blog Platform</div>
-          <p class="pdesc">A modern blog with SSR, rich text editor, user profiles, and a PostgreSQL backend.</p>
-          <a href="#" class="plink">View Project</a>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -719,12 +1053,60 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fu').forEach(el => obs.observe(el));
 
-  // Stagger skill pills
   [...document.querySelectorAll('.spill')].forEach((el,i) => {
     el.style.transitionDelay = `${i * 35}ms`;
     el.classList.add('fu');
     obs.observe(el);
   });
+
+  // ── FLOATING PARTICLES in projects section ──
+  (function spawnParticles() {
+    const container = document.getElementById('csParticles');
+    if (!container) return;
+
+    function makeParticle() {
+      const p = document.createElement('div');
+      p.className = 'cs-particle';
+      const size = Math.random() * 4 + 2;
+      const left = Math.random() * 100;
+      const delay = Math.random() * 6;
+      const dur   = Math.random() * 5 + 5;
+      const bottom = Math.random() * 40;
+      p.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${left}%;
+        bottom:${bottom}%;
+        animation-duration:${dur}s;
+        animation-delay:${delay}s;
+        opacity:0;
+      `;
+      container.appendChild(p);
+      setTimeout(() => p.remove(), (dur + delay) * 1000 + 500);
+    }
+
+    // Initial burst
+    for (let i = 0; i < 20; i++) makeParticle();
+    // Keep spawning
+    setInterval(() => makeParticle(), 600);
+  })();
+
+  // ── NOTIFY ──
+  function handleNotify() {
+    const input = document.getElementById('csEmail');
+    const btn = input.nextElementSibling;
+    if (!input.value || !input.value.includes('@')) {
+      input.style.outline = '1px solid #ef4444';
+      setTimeout(() => input.style.outline = '', 1500);
+      return;
+    }
+    btn.textContent = 'Noted ✓';
+    btn.style.background = '#22c55e';
+    input.value = '';
+    setTimeout(() => {
+      btn.textContent = 'Notify Me';
+      btn.style.background = '';
+    }, 3000);
+  }
 
   // ── FORM ──
   function handleSubmit(e) {
