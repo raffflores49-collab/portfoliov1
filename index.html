@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jhon Ralph Flores — IT Student & Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    [data-theme="dark"] {
+      --bg: #070b14;
+      --bg2: #0b0f1c;
+      --surface: #111827;
+      --border: rgba(255,255,255,0.07);
+      --accent: #4f8fff;
+      --accent2: #7dd3fc;
+      --accent-glow: rgba(79,143,255,0.28);
+      --text: #e8edf5;
+      --muted: #6b7a99;
+      --white: #ffffff;
+      --nav-bg: rgba(7,11,20,0.78);
+      --cursor-color: rgba(79,143,255,0.14);
+      --icon-bg: rgba(255,255,255,0.055);
+      --icon-border: rgba(255,255,255,0.1);
+      --orb1: rgba(79,143,255,0.13);
+      --orb2: rgba(125,211,252,0.07);
+      --photo-shadow: rgba(0,0,0,0.7);
+      --htitle: #ffffff;
+    }
+    [data-theme="light"] {
+      --bg: #eef2fb;
+      --bg2: #e4eaf6;
+      --surface: #ffffff;
+      --border: rgba(0,0,0,0.08);
+      --accent: #2563eb;
+      --accent2: #1d4ed8;
+      --accent-glow: rgba(37,99,235,0.22);
+      --text: #1e2d4a;
+      --muted: #64748b;
+      --white: #1e2d4a;
+      --nav-bg: rgba(238,242,251,0.88);
+      --cursor-color: rgba(37,99,235,0.1);
+      --icon-bg: rgba(255,255,255,0.85);
+      --icon-border: rgba(37,99,235,0.14);
+      --orb1: rgba(37,99,235,0.09);
+      --orb2: rgba(96,165,250,0.07);
+      --photo-shadow: rgba(37,99,235,0.14);
+      --htitle: #1e2d4a;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      transition: background 0.45s, color 0.45s;
+    }
+
+    /* Noise texture */
+    body::before {
+      content:''; position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; opacity:0.3;
+    }
+
+    /* CURSOR GLOW */
+    #cursor-glow {
+      position:fixed; width:520px; height:520px; border-radius:50%;
+      background:radial-gradient(circle, var(--cursor-color) 0%, transparent 70%);
+      pointer-events:none; transform:translate(-50%,-50%); z-index:1;
+      transition: opacity 0.3s;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 60px;
+      backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+      border-bottom:1px solid var(--border);
+      background:var(--nav-bg);
+      transition:background 0.45s, border-color 0.45s;
+    }
+    .nav-logo {
+      font-family:'Syne',sans-serif; font-weight:800; font-size:1.2rem;
+      color:var(--white); letter-spacing:-0.03em;
+    }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; gap:34px; list-style:none; }
+    .nav-links a {
+      font-size:0.79rem; font-weight:500; letter-spacing:0.09em;
+      text-transform:uppercase; color:var(--muted);
+      text-decoration:none; transition:color 0.2s;
+    }
+    .nav-links a:hover { color:var(--white); }
+    .nav-right { display:flex; align-items:center; gap:12px; }
+
+    /* THEME TOGGLE */
+    .theme-icon { font-size:1rem; cursor:pointer; user-select:none; transition:transform 0.3s; }
+    .theme-icon:hover { transform:scale(1.2) rotate(15deg); }
+    .theme-track {
+      width:42px; height:22px; border-radius:999px;
+      background:var(--surface); border:1px solid var(--border);
+      cursor:pointer; position:relative; transition:background 0.3s;
+    }
+    .theme-track::after {
+      content:''; position:absolute; top:3px; left:3px;
+      width:14px; height:14px; border-radius:50%;
+      background:var(--accent);
+      transition:transform 0.3s ease, background 0.3s;
+    }
+    [data-theme="light"] .theme-track::after { transform:translateX(20px); }
+
+    .nav-cta {
+      background:var(--accent); color:#fff;
+      font-size:0.79rem; font-weight:600; letter-spacing:0.06em;
+      text-transform:uppercase; text-decoration:none;
+      padding:9px 20px; border-radius:6px;
+      transition:box-shadow 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { box-shadow:0 0 22px var(--accent-glow); transform:translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height:100vh; display:flex; align-items:center;
+      padding:110px 60px 80px; position:relative; overflow:hidden;
+    }
+    .orb {
+      position:absolute; border-radius:50%;
+      pointer-events:none; filter:blur(90px);
+      transition:transform 1.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      will-change:transform;
+    }
+    .orb-a { width:650px; height:650px; background:var(--orb1); top:-150px; right:50px; }
+    .orb-b { width:420px; height:420px; background:var(--orb2); bottom:-80px; left:-60px; }
+
+    .hero-inner {
+      display:grid; grid-template-columns:1fr 480px;
+      gap:50px; align-items:center;
+      max-width:1200px; margin:0 auto; width:100%;
+      position:relative; z-index:2;
+    }
+
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(79,143,255,0.09); border:1px solid rgba(79,143,255,0.22);
+      border-radius:999px; padding:5px 14px;
+      font-size:0.73rem; font-weight:500; color:var(--accent2);
+      margin-bottom:20px; width:fit-content;
+    }
+    [data-theme="light"] .hero-badge { background:rgba(37,99,235,0.07); border-color:rgba(37,99,235,0.2); }
+    .hero-badge::before {
+      content:''; width:7px; height:7px; border-radius:50%;
+      background:var(--accent2); box-shadow:0 0 7px var(--accent2);
+      animation:pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    .hero-name {
+      font-family:'Syne',sans-serif;
+      font-size:clamp(2.5rem,4.5vw,4rem);
+      font-weight:800; line-height:1.04;
+      letter-spacing:-0.04em; color:var(--htitle);
+      margin-bottom:4px;
+    }
+    .hero-name .ac { color:var(--accent); }
+    .hero-title {
+      font-family:'Syne',sans-serif;
+      font-size:clamp(0.9rem,1.6vw,1.15rem);
+      font-weight:600; color:var(--muted);
+      margin-bottom:16px;
+    }
+    .hero-desc {
+      font-size:0.94rem; line-height:1.78;
+      color:var(--muted); max-width:460px; margin-bottom:30px;
+    }
+    .hero-btns { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:40px; }
+    .btn-p {
+      background:var(--accent); color:#fff;
+      padding:12px 26px; border-radius:8px;
+      font-size:0.87rem; font-weight:600;
+      text-decoration:none; transition:all 0.2s;
+      box-shadow:0 4px 18px var(--accent-glow);
+    }
+    .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 28px var(--accent-glow); }
+    .btn-s {
+      background:transparent; color:var(--text);
+      padding:12px 26px; border-radius:8px;
+      font-size:0.87rem; font-weight:500;
+      text-decoration:none; border:1px solid var(--border);
+      transition:all 0.2s;
+    }
+    .btn-s:hover { border-color:var(--accent); color:var(--accent); }
+
+    .stats { display:flex; gap:34px; }
+    .snum {
+      font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800;
+      color:var(--htitle); letter-spacing:-0.03em;
+    }
+    .snum span { color:var(--accent); }
+    .slabel { font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.07em; }
+
+    .socials { display:flex; gap:10px; margin-bottom:16px; }
+    .si {
+      width:35px; height:35px; border:1px solid var(--border); border-radius:8px;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--muted); text-decoration:none; transition:all 0.2s;
+    }
+    .si:hover { border-color:var(--accent); color:var(--accent); background:rgba(79,143,255,0.07); }
+    .si svg { width:14px; height:14px; fill:currentColor; }
+
+    /* ── PHOTO WRAP ── */
+    .photo-wrap {
+      position:relative; height:520px;
+      display:flex; align-items:center; justify-content:center;
+    }
+
+    /* FLOATING TECH ICONS */
+    .ti {
+      position:absolute;
+      display:flex; align-items:center; justify-content:center;
+      border-radius:14px;
+      background:var(--icon-bg);
+      border:1px solid var(--icon-border);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      box-shadow:0 6px 24px rgba(0,0,0,0.18);
+      transition:background 0.45s, border-color 0.45s, box-shadow 0.3s;
+      cursor:default; user-select:none;
+      will-change:transform;
+    }
+    [data-theme="light"] .ti { box-shadow:0 4px 16px rgba(37,99,235,0.1); }
+    .ti:hover { transform:scale(1.18) translateY(-5px) !important; box-shadow:0 18px 40px rgba(79,143,255,0.28) !important; z-index:10 !important; }
+    .ti.lg { width:58px; height:58px; font-size:1.7rem; }
+    .ti.md { width:48px; height:48px; font-size:1.35rem; }
+    .ti.sm { width:40px; height:40px; font-size:1rem; }
+
+    /* Individual positions */
+    .ti-html  { top:2%;   left:4%;   animation:fl3 4.3s ease-in-out infinite; }
+    .ti-css   { top:18%;  left:0%;   animation:fl1 5.1s ease-in-out infinite 0.5s; }
+    .ti-js    { top:38%;  left:3%;   animation:fl2 4.8s ease-in-out infinite 1s; }
+    .ti-py    { top:57%;  left:1%;   animation:fl4 5.6s ease-in-out infinite 0.3s; }
+    .ti-larv  { top:73%;  left:7%;   animation:fl5 4.1s ease-in-out infinite 0.8s; }
+    .ti-db    { bottom:2%;left:28%;  animation:fl1 6.2s ease-in-out infinite 1.3s; }
+    .ti-next  { top:2%;   right:4%;  animation:fl2 4.9s ease-in-out infinite 0.2s; }
+    .ti-nuxt  { top:18%;  right:0%;  animation:fl3 5.3s ease-in-out infinite 0.7s; }
+    .ti-flu   { top:37%;  right:2%;  animation:fl4 4.4s ease-in-out infinite 1.4s; }
+    .ti-dart  { top:55%;  right:3%;  animation:fl1 5.9s ease-in-out infinite 0.1s; }
+    .ti-post  { top:71%;  right:6%;  animation:fl5 4.7s ease-in-out infinite 0.9s; }
+    .ti-cv    { bottom:3%;right:26%; animation:fl2 5.4s ease-in-out infinite 0.4s; }
+
+    @keyframes fl1 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-11px) rotate(2deg)} }
+    @keyframes fl2 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-8px) rotate(-2deg)} }
+    @keyframes fl3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+    @keyframes fl4 { 0%,100%{transform:translateY(0) rotate(0)} 33%{transform:translateY(-6px) rotate(1deg)} 66%{transform:translateY(-10px) rotate(-1deg)} }
+    @keyframes fl5 { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-9px) scale(1.04)} }
+
+    /* Tooltip */
+    .ti::after {
+      content:attr(data-tip);
+      position:absolute; bottom:-24px; left:50%; transform:translateX(-50%);
+      font-family:'DM Sans',sans-serif; font-size:0.62rem; font-weight:600;
+      color:var(--muted); white-space:nowrap;
+      opacity:0; transition:opacity 0.2s; pointer-events:none;
+    }
+    .ti:hover::after { opacity:1; }
+
+    /* Photo */
+    .hero-photo {
+      width:270px; height:360px;
+      object-fit:cover; object-position:top center;
+      border-radius:20px; border:1px solid var(--border);
+      position:relative; z-index:2;
+      box-shadow:0 40px 80px var(--photo-shadow), 0 0 55px var(--accent-glow);
+      transition:box-shadow 0.45s;
+    }
+    .hero-photo-ph {
+      width:270px; height:360px; border-radius:20px;
+      background:var(--surface); border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:10px; position:relative; z-index:2;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding:96px 60px; }
+    .wrap { max-width:1200px; margin:0 auto; }
+    .stag {
+      font-size:0.71rem; font-weight:600; letter-spacing:0.12em;
+      text-transform:uppercase; color:var(--accent);
+      margin-bottom:10px; display:block;
+    }
+    .stitle {
+      font-family:'Syne',sans-serif;
+      font-size:clamp(1.9rem,3.2vw,2.6rem);
+      font-weight:800; color:var(--htitle);
+      letter-spacing:-0.04em; line-height:1.1; margin-bottom:14px;
+    }
+    .ssub { font-size:0.95rem; color:var(--muted); line-height:1.7; max-width:500px; }
+    .divider { border:none; border-top:1px solid var(--border); margin:0; }
+
+    /* ── ABOUT ── */
+    #about { background:var(--bg2); }
+    .about-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:72px; align-items:start; margin-top:52px;
+    }
+    .about-text p { font-size:0.95rem; color:var(--muted); line-height:1.82; margin-bottom:14px; }
+    .about-text p strong { color:var(--text); }
+    .qlist { list-style:none; margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+    .qlist li {
+      display:flex; align-items:baseline; gap:10px;
+      font-size:0.87rem; color:var(--muted);
+    }
+    .qlist li::before { content:'—'; color:var(--accent); font-weight:700; flex-shrink:0; }
+    .qlist li strong { color:var(--text); }
+
+    /* ── SKILLS ── */
+    .skills-wall { display:flex; flex-wrap:wrap; gap:10px; margin-top:44px; }
+    .spill {
+      display:flex; align-items:center; gap:7px;
+      padding:9px 16px; border-radius:9px;
+      background:var(--surface); border:1px solid var(--border);
+      font-size:0.83rem; font-weight:500; color:var(--text);
+      transition:all 0.2s; cursor:default;
+    }
+    .spill:hover {
+      border-color:var(--accent); color:var(--accent);
+      background:rgba(79,143,255,0.06); transform:translateY(-2px);
+    }
+    .spill .ico { font-size:1rem; }
+    .spill .cat {
+      font-size:0.67rem; color:var(--muted);
+      border-left:1px solid var(--border); padding-left:7px; margin-left:2px;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background:var(--bg2); }
+    .pgrid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:48px; }
+    .pcard {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:14px; overflow:hidden;
+      transition:transform 0.2s, border-color 0.2s;
+    }
+    .pcard:hover { transform:translateY(-5px); border-color:rgba(79,143,255,0.3); }
+    .pcard.feat { grid-column:span 2; }
+    .pthumb {
+      height:155px; display:flex; align-items:center; justify-content:center;
+      font-size:2.4rem; position:relative; overflow:hidden;
+    }
+    .pcard.feat .pthumb { height:195px; }
+    .ptbg { position:absolute; inset:0; background:linear-gradient(135deg,var(--c1),var(--c2)); opacity:0.45; }
+    .ptico { position:relative; z-index:1; }
+    .pbody { padding:20px; }
+    .ptags { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:9px; }
+    .ptag {
+      font-size:0.67rem; font-weight:600; letter-spacing:0.05em;
+      padding:3px 9px; border-radius:999px;
+      background:rgba(79,143,255,0.09); color:var(--accent2);
+    }
+    [data-theme="light"] .ptag { background:rgba(37,99,235,0.07); color:var(--accent); }
+    .ptitle {
+      font-family:'Syne',sans-serif; font-weight:700;
+      font-size:0.98rem; color:var(--htitle); margin-bottom:7px;
+    }
+    .pdesc { font-size:0.83rem; color:var(--muted); line-height:1.65; margin-bottom:16px; }
+    .plink {
+      font-size:0.8rem; font-weight:600; color:var(--accent);
+      text-decoration:none; display:inline-flex; align-items:center; gap:5px;
+      transition:gap 0.2s;
+    }
+    .plink:hover { gap:9px; }
+    .plink::after { content:'→'; }
+
+    /* ── CONTACT ── */
+    .cgrid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; margin-top:52px; }
+    .cinfo p { font-size:0.95rem; color:var(--muted); line-height:1.8; margin-bottom:24px; }
+    .citems { display:flex; flex-direction:column; gap:12px; }
+    .citem {
+      display:flex; align-items:center; gap:13px;
+      padding:12px 15px; border:1px solid var(--border); border-radius:9px;
+      background:rgba(255,255,255,0.02); transition:border-color 0.2s;
+    }
+    [data-theme="light"] .citem { background:rgba(37,99,235,0.02); }
+    .citem:hover { border-color:rgba(79,143,255,0.28); }
+    .cico {
+      width:33px; height:33px; border-radius:7px;
+      background:rgba(79,143,255,0.1);
+      display:flex; align-items:center; justify-content:center; font-size:0.9rem; flex-shrink:0;
+    }
+    .clabel { font-size:0.7rem; color:var(--muted); margin-bottom:1px; }
+    .cval { font-size:0.84rem; color:var(--text); font-weight:500; }
+
+    .cform { display:flex; flex-direction:column; gap:13px; }
+    .fg { display:flex; flex-direction:column; gap:5px; }
+    .fg label { font-size:0.76rem; font-weight:500; color:var(--muted); letter-spacing:0.04em; }
+    .fg input, .fg textarea {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:8px; padding:11px 14px;
+      color:var(--text); font-family:'DM Sans',sans-serif; font-size:0.87rem;
+      outline:none; transition:border-color 0.2s, background 0.45s; resize:none;
+    }
+    .fg input:focus, .fg textarea:focus { border-color:var(--accent); }
+    .frow { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+    .fsub {
+      background:var(--accent); color:#fff; border:none; border-radius:8px;
+      padding:12px 26px; font-family:'DM Sans',sans-serif;
+      font-size:0.87rem; font-weight:600; cursor:pointer;
+      transition:all 0.2s; align-self:flex-start;
+      box-shadow:0 4px 18px var(--accent-glow);
+    }
+    .fsub:hover { transform:translateY(-2px); box-shadow:0 8px 28px var(--accent-glow); }
+
+    /* FOOTER */
+    footer {
+      border-top:1px solid var(--border); padding:30px 60px;
+      display:flex; align-items:center; justify-content:space-between;
+      background:var(--bg);
+    }
+    .flogo { font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; color:var(--white); }
+    .flogo span { color:var(--accent); }
+    .fcopy { font-size:0.77rem; color:var(--muted); }
+    .fsocials { display:flex; gap:8px; }
+    .fsocials a {
+      width:31px; height:31px; border-radius:6px;
+      border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--muted); text-decoration:none; transition:all 0.2s;
+    }
+    .fsocials a:hover { border-color:var(--accent); color:var(--accent); }
+
+    /* SCROLL ANIM */
+    .fu { opacity:0; transform:translateY(26px); transition:opacity 0.6s ease, transform 0.6s ease; }
+    .fu.vis { opacity:1; transform:translateY(0); }
+
+    @media (max-width:960px) {
+      nav { padding:16px 22px; }
+      .nav-links { display:none; }
+      .hero { padding:96px 22px 60px; }
+      .hero-inner { grid-template-columns:1fr; }
+      .photo-wrap { height:400px; }
+      section { padding:64px 22px; }
+      .about-grid,.cgrid { grid-template-columns:1fr; gap:38px; }
+      .pgrid { grid-template-columns:1fr; }
+      .pcard.feat { grid-column:span 1; }
+      footer { flex-direction:column; gap:12px; text-align:center; padding:22px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor-glow"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JR<span>.</span>Flores</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="theme-icon" id="themeIcon">🌙</span>
+    <div class="theme-track" id="themeToggle"></div>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="orb orb-a" id="orbA"></div>
+  <div class="orb orb-b" id="orbB"></div>
+
+  <div class="hero-inner">
+    <!-- TEXT -->
+    <div>
+      <div class="hero-badge">IT Student · Open to Opportunities</div>
+      <h1 class="hero-name">Hi, I'm <span class="ac">Jhon Ralph</span><br>Flores</h1>
+      <p class="hero-title">Full-Stack Developer in Training 🇵🇭</p>
+      <p class="hero-desc">A passionate IT student from the Philippines building web apps, mobile experiences, and exploring the intersection of software and intelligence. I turn ideas into code.</p>
+      <div class="socials">
+        <a href="#" class="si" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a href="#" class="si" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="mailto:jhonralphflores@email.com" class="si" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></a>
+        <a href="#" class="si" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      </div>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-p">View My Work</a>
+        <a href="#contact" class="btn-s">Get in Touch</a>
+      </div>
+      <div class="stats">
+        <div><div class="snum">6<span>+</span></div><div class="slabel">Tech Stacks</div></div>
+        <div><div class="snum">3<span>+</span></div><div class="slabel">Projects Built</div></div>
+        <div><div class="snum">IT</div><div class="slabel">Student</div></div>
+      </div>
+    </div>
+
+    <!-- PHOTO + FLOATING ICONS -->
+    <div class="photo-wrap">
+      <!-- Left icons -->
+      <div class="ti lg ti-html" data-tip="HTML5">🌐</div>
+      <div class="ti md ti-css"  data-tip="CSS3">🎨</div>
+      <div class="ti lg ti-js"   data-tip="JavaScript">⚡</div>
+      <div class="ti md ti-py"   data-tip="Python">🐍</div>
+      <div class="ti sm ti-larv" data-tip="Laravel">🔴</div>
+      <div class="ti sm ti-db"   data-tip="MySQL">🗄️</div>
+      <!-- Right icons -->
+      <div class="ti lg ti-next" data-tip="Next.js">▲</div>
+      <div class="ti md ti-nuxt" data-tip="Nuxt.js">💚</div>
+      <div class="ti lg ti-flu"  data-tip="Flutter">💙</div>
+      <div class="ti md ti-dart" data-tip="Dart">🎯</div>
+      <div class="ti sm ti-post" data-tip="PostgreSQL">🐘</div>
+      <div class="ti sm ti-cv"   data-tip="OpenCV">👁️</div>
+      <!-- Photo -->
+      <img src="prof.png" alt="Jhon Ralph Flores" class="hero-photo"
+        onerror="this.style.display='none';document.getElementById('phph').style.display='flex';" />
+      <div class="hero-photo-ph" id="phph" style="display:none;">
+        <span style="font-size:3.5rem">👨‍💻</span>
+        <span style="font-size:0.8rem;color:var(--muted)">Jhon Ralph Flores</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-text fu">
+        <span class="stag">About Me</span>
+        <h2 class="stitle">Curious mind,<br>deliberate builder.</h2>
+        <p>I'm <strong>Jhon Ralph Flores</strong>, an IT student from the Philippines with a love for building things that live on screens. Whether it's a web app, a mobile experience, or a data pipeline — I'm drawn to the whole stack.</p>
+        <p>I thrive at the intersection of design and logic — I want the code to work <em>and</em> look good doing it. When I'm not writing code, I'm exploring how machines understand the visual world through <strong>image processing</strong>.</p>
+      </div>
+      <div class="fu">
+        <span class="stag">Quick Facts</span>
+        <ul class="qlist">
+          <li><strong>Name:</strong> Jhon Ralph Flores</li>
+          <li><strong>Role:</strong> IT Student & Aspiring Developer</li>
+          <li><strong>Location:</strong> Philippines 🇵🇭</li>
+          <li><strong>Focus:</strong> Full-Stack Web & Mobile Dev</li>
+          <li><strong>Interest:</strong> Image Processing & Computer Vision</li>
+          <li><strong>Status:</strong> Open to internships & freelance</li>
+          <li><strong>Motto:</strong> Learn every day, ship something real</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="fu">
+      <span class="stag">Tech Stack</span>
+      <h2 class="stitle">What I work with.</h2>
+      <p class="ssub">A growing toolkit across frontend, backend, mobile, and data — built through coursework, side projects, and relentless tinkering.</p>
+    </div>
+    <div class="skills-wall fu">
+      <div class="spill"><span class="ico">🌐</span> HTML <span class="cat">Frontend</span></div>
+      <div class="spill"><span class="ico">🎨</span> CSS <span class="cat">Frontend</span></div>
+      <div class="spill"><span class="ico">⚡</span> JavaScript <span class="cat">Frontend</span></div>
+      <div class="spill"><span class="ico">▲</span> Next.js <span class="cat">Frontend</span></div>
+      <div class="spill"><span class="ico">💚</span> Nuxt.js <span class="cat">Frontend</span></div>
+      <div class="spill"><span class="ico">🔴</span> Laravel <span class="cat">Backend</span></div>
+      <div class="spill"><span class="ico">🐍</span> Python <span class="cat">Backend</span></div>
+      <div class="spill"><span class="ico">💙</span> Flutter <span class="cat">Mobile</span></div>
+      <div class="spill"><span class="ico">🎯</span> Dart <span class="cat">Mobile</span></div>
+      <div class="spill"><span class="ico">🗄️</span> MySQL <span class="cat">Database</span></div>
+      <div class="spill"><span class="ico">🐘</span> PostgreSQL <span class="cat">Database</span></div>
+      <div class="spill"><span class="ico">📦</span> SQLite <span class="cat">Database</span></div>
+      <div class="spill"><span class="ico">👁️</span> OpenCV <span class="cat">Vision</span></div>
+      <div class="spill"><span class="ico">🔢</span> NumPy <span class="cat">Vision</span></div>
+      <div class="spill"><span class="ico">🐙</span> Git <span class="cat">Tools</span></div>
+      <div class="spill"><span class="ico">🎨</span> Figma <span class="cat">Design</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="fu">
+      <span class="stag">Projects</span>
+      <h2 class="stitle">Things I've built.</h2>
+      <p class="ssub">A selection of personal and academic projects — each one a lesson learned and a skill sharpened.</p>
+    </div>
+    <div class="pgrid">
+      <div class="pcard feat fu">
+        <div class="pthumb" style="--c1:#1a2a6c;--c2:#b21f1f;">
+          <div class="ptbg"></div><span class="ptico">🛒</span>
+        </div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">Laravel</span><span class="ptag">MySQL</span><span class="ptag">HTML/CSS</span></div>
+          <div class="ptitle">E-Commerce Web App</div>
+          <p class="pdesc">A full-stack e-commerce platform built with Laravel featuring user authentication, product listings, cart management, and order tracking with a clean MVC architecture.</p>
+          <a href="#" class="plink">View Project</a>
+        </div>
+      </div>
+      <div class="pcard fu">
+        <div class="pthumb" style="--c1:#0f3460;--c2:#533483;">
+          <div class="ptbg"></div><span class="ptico">📸</span>
+        </div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">Python</span><span class="ptag">OpenCV</span><span class="ptag">NumPy</span></div>
+          <div class="ptitle">Image Filter Pipeline</div>
+          <p class="pdesc">A Python-based image processing tool applying edge detection, color segmentation, and noise reduction on uploaded photos in real time.</p>
+          <a href="#" class="plink">View Project</a>
+        </div>
+      </div>
+      <div class="pcard fu">
+        <div class="pthumb" style="--c1:#134e5e;--c2:#71b280;">
+          <div class="ptbg"></div><span class="ptico">📱</span>
+        </div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">Flutter</span><span class="ptag">Dart</span><span class="ptag">SQLite</span></div>
+          <div class="ptitle">Task Manager App</div>
+          <p class="pdesc">A cross-platform mobile productivity app with local database storage, task categorization, reminders, and a minimal Flutter UI.</p>
+          <a href="#" class="plink">View Project</a>
+        </div>
+      </div>
+      <div class="pcard fu">
+        <div class="pthumb" style="--c1:#373b44;--c2:#4286f4;">
+          <div class="ptbg"></div><span class="ptico">🌐</span>
+        </div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">PostgreSQL</span><span class="ptag">REST API</span></div>
+          <div class="ptitle">Blog Platform</div>
+          <p class="pdesc">A modern blog with SSR, rich text editor, user profiles, and a PostgreSQL backend.</p>
+          <a href="#" class="plink">View Project</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="cgrid">
+      <div class="cinfo fu">
+        <span class="stag">Contact</span>
+        <h2 class="stitle">Let's build<br>something together.</h2>
+        <p>I'm open to internships, freelance projects, or any opportunity to learn and contribute. If you have a project idea or just want to connect — I'd love to hear from you.</p>
+        <div class="citems">
+          <div class="citem"><div class="cico">📍</div><div><div class="clabel">Location</div><div class="cval">Philippines 🇵🇭</div></div></div>
+          <div class="citem"><div class="cico">✉️</div><div><div class="clabel">Email</div><div class="cval">jhonralphflores@email.com</div></div></div>
+          <div class="citem"><div class="cico">🎓</div><div><div class="clabel">Status</div><div class="cval">IT Student · Open to Internships</div></div></div>
+        </div>
+      </div>
+      <form class="cform fu" onsubmit="handleSubmit(event)">
+        <div class="frow">
+          <div class="fg"><label>First Name</label><input type="text" placeholder="Juan" required/></div>
+          <div class="fg"><label>Last Name</label><input type="text" placeholder="Dela Cruz" required/></div>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" placeholder="juan@email.com" required/></div>
+        <div class="fg"><label>Subject</label><input type="text" placeholder="Project collaboration, internship…"/></div>
+        <div class="fg"><label>Message</label><textarea rows="5" placeholder="Tell me about your project or opportunity…" required></textarea></div>
+        <button type="submit" class="fsub">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">JR<span>.</span>Flores</div>
+  <div class="fcopy">© 2026 Jhon Ralph Flores. Built with HTML & CSS.</div>
+  <div class="fsocials">
+    <a href="#"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+    <a href="#"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+  </div>
+</footer>
+
+<script>
+  // ── CURSOR GLOW + PARALLAX ORBS ──
+  const glow = document.getElementById('cursor-glow');
+  const orbA = document.getElementById('orbA');
+  const orbB = document.getElementById('orbB');
+  let mx = innerWidth/2, my = innerHeight/2, cx = mx, cy = my;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  (function loop() {
+    cx += (mx - cx) * 0.09;
+    cy += (my - cy) * 0.09;
+    glow.style.left = cx + 'px';
+    glow.style.top  = cy + 'px';
+    const dx = (mx/innerWidth  - 0.5) * 70;
+    const dy = (my/innerHeight - 0.5) * 50;
+    orbA.style.transform = `translate(${dx}px, ${dy}px)`;
+    orbB.style.transform = `translate(${-dx*.55}px, ${-dy*.55}px)`;
+    requestAnimationFrame(loop);
+  })();
+
+  // ── THEME TOGGLE ──
+  const html = document.documentElement;
+  const icon = document.getElementById('themeIcon');
+  document.getElementById('themeToggle').addEventListener('click', toggle);
+  icon.addEventListener('click', toggle);
+
+  function toggle() {
+    const dark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', dark ? 'light' : 'dark');
+    icon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  // ── SCROLL ANIMATIONS ──
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+  // Stagger skill pills
+  [...document.querySelectorAll('.spill')].forEach((el,i) => {
+    el.style.transitionDelay = `${i * 35}ms`;
+    el.classList.add('fu');
+    obs.observe(el);
+  });
+
+  // ── FORM ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.fsub');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#22c55e';
+    btn.style.boxShadow = '0 4px 20px rgba(34,197,94,.3)';
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+      btn.style.boxShadow = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
